@@ -19,10 +19,10 @@ def testing_pratt_parse():
     temp = "-(-5)"
     src_list = tokenize(temp)
     parsed_tree = pratt_parse(src_list, 0)
-    output = evaluate(parsed_tree)
+    result = evaluate(parsed_tree)
     print_tree(parsed_tree)
     print()
-    print("The result is: ", output)
+    print("The result is: ", result)
     return
 
 
@@ -34,5 +34,5 @@ def print_tree(node, depth=0):
 
 
 if __name__ == "__main__":
-    #main()
-    testing_pratt_parse()
+    main()
+    #testing_pratt_parse()
