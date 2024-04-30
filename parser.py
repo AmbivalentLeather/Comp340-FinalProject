@@ -34,11 +34,13 @@ def pratt_parse(lexer_list, p1_precedence):
         # left_tree
         if precedence_dict[lexer_list[0][1]] > 0:
             left_tree = op
+            p2_precedence = precedence_dict[lexer_list[0][1]]
         else:
             left_tree = TreeNode(lexer_list[0])
             lexer_list.pop(0)
 
-        if left_tree.value == '(':
+        if left_tree.token == 'LPAREN':
+            p2_precedence = precedence_dict[lexer_list[1][1]]
             return pratt_parse(lexer_list, 0)
         op = TreeNode(lexer_list[0])
         lexer_list.pop(0)
