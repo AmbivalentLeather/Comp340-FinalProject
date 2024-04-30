@@ -29,4 +29,6 @@ def tokenize(src: str):
         else:
             src_list.append([src[i], token])
 
+    # It could be helpful to add an "End of string" character for us to use in the parser later
+
     return src_list

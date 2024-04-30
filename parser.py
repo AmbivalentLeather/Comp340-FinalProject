@@ -24,7 +24,8 @@ def pratt_parse(lexer_list, p1_precedence):
             lexer_list.pop(0)
             return pratt_parse(lexer_list, p2_precedence)
 
-        # If our next element is a PAREN -- NOTE: THIS IS LOGICALLY INCORRECT BUT WORKS IN SOME CASES
+        # If our next element is a PAREN -- NOTE: THIS IS LOGICALLY INCORRECT BUT WORKS IN TEST CASES
+        # Does not work for "-(-5)"
         if p2_precedence == -1:
             temp: TreeNode = TreeNode(lexer_list[0])
             lexer_list.pop(0)   # Pop num
@@ -37,10 +38,16 @@ def pratt_parse(lexer_list, p1_precedence):
             lexer_list.pop(0)
             return temp
 
+        neg_flag = False
         # left_tree
         if precedence_dict[lexer_list[0][1]] > 0:
-            left_tree = op
-            p2_precedence = precedence_dict[lexer_list[0][1]]
+            if lexer_list[0][1] == 'MINUS':
+                neg_flag = True
+                left_tree = TreeNode(lexer_list[0])
+                lexer_list.pop(0)
+            else:
+                left_tree = op
+                p2_precedence = precedence_dict[lexer_list[0][1]]
         else:
             left_tree = TreeNode(lexer_list[0])
             lexer_list.pop(0)
@@ -48,9 +55,15 @@ def pratt_parse(lexer_list, p1_precedence):
         if left_tree.token == 'LPAREN':
             p2_precedence = precedence_dict[lexer_list[1][1]]
             return pratt_parse(lexer_list, 0)
-        op = TreeNode(lexer_list[0])
-        lexer_list.pop(0)
-        right_tree = pratt_parse(lexer_list, p2_precedence)
+
+        if neg_flag == True:
+            op = left_tree
+            left_tree = TreeNode(['0', 'NUMB'])
+            right_tree = pratt_parse(lexer_list, 4)
+        else:
+            op = TreeNode(lexer_list[0])
+            lexer_list.pop(0)
+            right_tree = pratt_parse(lexer_list, p2_precedence)
 
         # Set op.left and op.right accordingly
         op.left = left_tree
@@ -61,7 +74,7 @@ def pratt_parse(lexer_list, p1_precedence):
         # If that is true, we return op.
         some_test = False   # We predefine some_test as False so we can check it in the second condition below
         if len(lexer_list) >= 1:
-            some_test = p2_precedence >= precedence_dict[lexer_list[0][1]]
+            some_test = p2_precedence > precedence_dict[lexer_list[0][1]]
         if op.left.token == 'NUMB' and op.right.token == 'NUMB' and some_test:
             return op
 
