@@ -19,7 +19,13 @@ def pratt_parse(lexer_list, p1_precedence):
         p2_precedence = precedence_dict[lexer_list[1][1]]
         op_boolean = precedence_dict[lexer_list[1][1]] > 0
 
-        if op_boolean is False and p2_precedence == -1:
+        # If our first element is a PAREN
+        if precedence_dict[lexer_list[0][1]] == -1:
+            lexer_list.pop(0)
+            return pratt_parse(lexer_list, p2_precedence)
+
+        # If our next element is a PAREN -- NOTE: THIS IS LOGICALLY INCORRECT BUT WORKS IN SOME CASES
+        if p2_precedence == -1:
             temp: TreeNode = TreeNode(lexer_list[0])
             lexer_list.pop(0)   # Pop num
             lexer_list.pop(0)   # Pop rparen
@@ -49,5 +55,14 @@ def pratt_parse(lexer_list, p1_precedence):
         # Set op.left and op.right accordingly
         op.left = left_tree
         op.right = right_tree
+
+        # Here we test to see if the future op is lower precedence than the current op.
+        # If that is true, we check if both op.left and op.right are 'NUMB' types.
+        # If that is true, we return op.
+        some_test = False   # We predefine some_test as False so we can check it in the second condition below
+        if len(lexer_list) >= 1:
+            some_test = p2_precedence >= precedence_dict[lexer_list[0][1]]
+        if op.left.token == 'NUMB' and op.right.token == 'NUMB' and some_test:
+            return op
 
     return op

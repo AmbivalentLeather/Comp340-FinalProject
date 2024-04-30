@@ -1,6 +1,6 @@
 def evaluate(node):
     if node.left is None or node.right is None:
-        return float(node.value)
+        return int(node.value)
 
     left = evaluate(node.left)
     right = evaluate(node.right)
