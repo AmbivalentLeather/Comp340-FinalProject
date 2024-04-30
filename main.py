@@ -9,8 +9,8 @@ def print_pratt_parse():
         src_list = tokenize(user_input)
         # [['10', 'NUMB'], ['*', 'TIMES'], ['3', 'NUMB'], ['/', 'DIVIDE'], ['40', 'NUMB'], ['+', 'PLUS'], ['1', 'NUMB']]
         parsed_tree = pratt_parse(src_list, 0)
-        x = evaluate(parsed_tree)
-        return x
+        output = evaluate(parsed_tree)
+        print(output)
 
 """
 def print_tree(node, depth=0):
@@ -20,6 +20,5 @@ def print_tree(node, depth=0):
         print_tree(node.right, depth + 1)
 """
 
-output = print_pratt_parse()
-print(output)
+print_pratt_parse()
 
