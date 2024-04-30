@@ -7,11 +7,9 @@ precedence_dict = {
     'LPAREN': 0, 'RPAREN':0
 }
 
-paren_flag = 0
 
 
 def pratt_parse(lexer_list, p1_precedence):
-    global paren_flag
     while lexer_list:
 
         if len(lexer_list) == 1:
@@ -20,20 +18,6 @@ def pratt_parse(lexer_list, p1_precedence):
             return temp
 
         p2_precedence = precedence_dict[lexer_list[1][1]]
-
-        # Code to handle parens does not currently work
-        # if lexer_list[0][1] == 'LPAREN':
-        #     paren_flag = 1
-        #     lexer_list.pop(0)
-        #     pass
-        #
-        # if lexer_list[0][1] == 'RPAREN':
-        #     paren_flag = 0
-        #     lexer_list.pop(0)
-        #     pass
-
-        if paren_flag is True:
-            p2_precedence += 3
 
         op_boolean = precedence_dict[lexer_list[1][1]] > 0
 
