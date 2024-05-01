@@ -1,6 +1,4 @@
 def evaluate(node):
-    if type(node) is None:
-        return None
     if node.token == "NUMB":
         return int(node.value)
 

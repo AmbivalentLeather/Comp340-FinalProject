@@ -1,6 +1,7 @@
 from lexer import tokenize
 from parser import pratt_parse
 from evaluator import evaluate
+from decipher import translate_baby_language
 
 
 def main():
@@ -13,6 +14,20 @@ def main():
         result = evaluate(parsed_tree)
         print("The result is: ", result)
     print("Now it is time to exit.")
+
+
+def baby_main():
+    while True:
+        user_input = input(">>> ")
+        if user_input == "poopoo":
+            break
+        translated_baby = translate_baby_language(user_input)
+        print("Interpreted as: ", translated_baby)
+        src_list = tokenize(translated_baby)
+        parsed_tree = pratt_parse(src_list, 0)
+        result = evaluate(parsed_tree)
+        print("The result is: ", result)
+    print("Now it is time to go poo poo.")
 
 
 def testing_pratt_parse():
@@ -34,5 +49,4 @@ def print_tree(node, depth=0):
 
 
 if __name__ == "__main__":
-    main()
-    #testing_pratt_parse()
+    baby_main()
