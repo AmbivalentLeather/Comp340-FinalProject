@@ -88,5 +88,6 @@ def pratt_parse(lexer_list, p1_precedence):
         if op.left.token == 'NUMB' and op.right.token == 'NUMB' and some_test:
             recursion_count -= 1
             return op
+        recursion_count = 0
 
     return op

@@ -1,15 +1,17 @@
 def evaluate(node):
-    if node.left is None or node.right is None:
+    if type(node) is None:
+        return None
+    if node.token == "NUMB":
         return int(node.value)
 
     left = evaluate(node.left)
     right = evaluate(node.right)
-    match node.value:
-        case "-":
+    match node.token:
+        case "MINUS":
             return left - right
-        case "/":
+        case "DIVIDE":
             return left / right
-        case "+":
+        case "PLUS":
             return left + right
-        case "*":
+        case "TIMES":
             return left * right
