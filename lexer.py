@@ -1,3 +1,9 @@
+"""
+Author: Nicholas Young
+Date: 2024-04-30
+Class: Comp 340-002
+"""
+
 def translate(ch: str):
     match ch:
         case '(':
@@ -28,7 +34,5 @@ def tokenize(src: str):
             src_list[-1][0] = src_list[-1][0] + src[i]
         else:
             src_list.append([src[i], token])
-
-    # It could be helpful to add an "End of string" character for us to use in the parser later
 
     return src_list

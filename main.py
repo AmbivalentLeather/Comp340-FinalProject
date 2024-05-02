@@ -1,3 +1,9 @@
+"""
+Author: Nicholas Young
+Date: 2024-04-30
+Class: Comp 340-002
+"""
+
 from lexer import tokenize
 from parser import pratt_parse
 from evaluator import evaluate
@@ -17,6 +23,9 @@ def main():
 
 
 def baby_main():
+    print("Hello baby language.")
+    print("Enter baby exp and see what you get.")
+    print()
     while True:
         user_input = input(">>> ")
         if user_input == "poopoo":
@@ -27,6 +36,7 @@ def baby_main():
         parsed_tree = pratt_parse(src_list, 0)
         result = evaluate(parsed_tree)
         print("The result is: ", result)
+        print()
     print("Now it is time to go poo poo.")
 
 

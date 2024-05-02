@@ -1,3 +1,9 @@
+"""
+Author: Nicholas Young
+Date: 2024-04-30
+Class: Comp 340-002
+"""
+
 def evaluate(node):
     if node.token == "NUMB":
         return int(node.value)

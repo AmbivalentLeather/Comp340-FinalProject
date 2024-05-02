@@ -1,3 +1,9 @@
+"""
+Author: Nicholas Young
+Date: 2024-04-30
+Class: Comp 340-002
+"""
+
 from tree_class import TreeNode
 
 precedence_dict = {
@@ -29,8 +35,6 @@ def pratt_parse(lexer_list, p1_precedence):
             recursion_count += 1
             return pratt_parse(lexer_list, p2_precedence)
 
-        # If our next element is a PAREN -- NOTE: THIS IS LOGICALLY INCORRECT BUT WORKS IN TEST CASES
-        # Does not work for "-(-5)"
         if p2_precedence == -1 and recursion_count > 0:
             temp: TreeNode = TreeNode(lexer_list[0])
             lexer_list.pop(0)   # Pop num

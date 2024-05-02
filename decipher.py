@@ -1,3 +1,9 @@
+"""
+Author: Nicholas Young
+Date: 2024-04-30
+Class: Comp 340-002
+"""
+import re
 
 def translate_baby_language(baby_string):
     translation_key = {
@@ -20,7 +26,7 @@ def translate_baby_language(baby_string):
     }
 
     # Clean the string
-    baby_string = baby_string.replace(" ", "")
+    baby_string = re.sub(r'\s', '', baby_string)
 
     # Add an end marker
     baby_string += 'X'
